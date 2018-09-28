@@ -68,19 +68,16 @@ object ListProblems {
     (ls,rs) match {
       case (_, Nil) => ls
       case (Nil, _) => rs
-      case (headL::tailL, headR::tailR) =>
-        if(headL <= headR) headL :: mergeTwoSortedLists(tailL, rs)
-        else headR :: mergeTwoSortedLists(ls, tailR)
+      case (headL :: tailL, headR :: tailR) =>
+        assert(tailL.isEmpty || headL <= tailL.head)
+        assert(tailR.isEmpty || headR <= tailR.head)
+        if (headL <= headR) headL :: mergeTwoSortedLists(tailL, rs) else headR :: mergeTwoSortedLists(ls, tailR)
     }
   }
 
-  def mergeSort[A](as: List[A])(implicit ordering: Ordering[A]): List[A] = {
-    as match {
+  def mergeSort[A](as: List[A])(implicit ordering: Ordering[A]): List[A] = as match {
       case Nil => as
-      case _ =>
-        val (left, right) = as.splitAt(as.length / 2)
-        mergeTwoSortedLists(left, right)
-    }
+      case _ => val (left, right) = as.splitAt(as.length / 2); mergeTwoSortedLists(left, right)
   }
 
 
