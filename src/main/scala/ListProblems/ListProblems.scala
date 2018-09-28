@@ -33,7 +33,7 @@ object ListProblems {
   def reverse[A](as: List[A], acc: List[A] = Nil): List[A] = as match {
       case Nil => acc
       case head::tail => reverse(tail, head::acc)
-    }
+  }
 
 
 
@@ -63,6 +63,25 @@ object ListProblems {
 
 
 
+  def mergeTwoSortedLists[A](ls: List[A], rs: List[A])(implicit ordering: Ordering[A]): List[A] = {
+    import ordering._
+    (ls,rs) match {
+      case (_, Nil) => ls
+      case (Nil, _) => rs
+      case (headL::tailL, headR::tailR) =>
+        if(headL <= headR) headL :: mergeTwoSortedLists(tailL, rs)
+        else headR :: mergeTwoSortedLists(ls, tailR)
+    }
+  }
+
+  def mergeSort[A](as: List[A])(implicit ordering: Ordering[A]): List[A] = {
+    as match {
+      case Nil => as
+      case _ =>
+        val (left, right) = as.splitAt(as.length / 2)
+        mergeTwoSortedLists(left, right)
+    }
+  }
 
 
 
@@ -81,6 +100,8 @@ object ListProblems {
     println(s"$l3 is sorted?: ${isSorted(l3)}")
     val l4 = insertionSort(l3)
     println(s"$l4 is sorted?: ${isSorted(l4)}")
+    val l5 = mergeSort(l3)
+    println(s"$l5 is sorted?: ${isSorted(l5)}")
     println()
     println(s"last:${last(l2)}")
     println(s"last_but_one:${lastButOne(l2)}")
