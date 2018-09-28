@@ -29,26 +29,30 @@ object ListProblems {
     case _::tail => length(tail, acc+1)
   }
 
-  def reverse[A](as: List[A]): List[A] = as match {
-    case Nil => Nil
-    case head::last::Nil => last::head::Nil
-    case head::tail => reverse(tail):::head::Nil
-  }
+  @tailrec
+  def reverse[A](as: List[A], acc: List[A] = Nil): List[A] = as match {
+      case Nil => acc
+      case head::tail => reverse(tail, head::acc)
+    }
+
 
 
   def isSorted[A](as: List[A])(implicit ordering: Ordering[A]): Boolean = {
     import ordering._
-    as.sliding(2).forall(t => t(0) <= t(1))
+    as.sliding(2).forall({case Seq(a,b) => a <= b})
   }
 
-  def insertIntoSorted[A](a: A, as: List[A])(implicit ordering: Ordering[A]): List[A] = {
+
+
+  @tailrec
+  def insertIntoSorted[A](a: A, as: List[A], acc: List[A] = Nil)(implicit ordering: Ordering[A]): List[A] = {
     import ordering._
     as match {
-      case Nil => List(a)
+      case Nil => acc ::: List(a)
       case head :: tail =>
         assert(tail.isEmpty || head <= tail.head)
-        if (a <= head) a :: as
-        else head :: insertIntoSorted(a, tail)
+        if (a <= head) acc ::: a :: as
+        else insertIntoSorted(a, tail, acc ::: head :: Nil)
     }
   }
 
