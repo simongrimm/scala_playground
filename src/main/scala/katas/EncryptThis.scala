@@ -1,5 +1,5 @@
 /*
-https://ide.geeksforgeeks.org/VGWJSVEQHs
+https://ide.geeksforgeeks.org/6uDLuJlvUr
 You want to create secret messages Here are the conditions:
 
 Your message is a string containing space separated words.
@@ -19,10 +19,10 @@ object EncryptThis {
      
   def encryptWord(word: String): String =  word.length match {
       case 0 => ""
-      case 1 => word.head.toInt + ""
-      case 2 => word.head.toInt + word.tail.last.toString
-      case 3 => word.head.toInt + word.tail.last.toString + word.tail.head.toString
-      case _ => word.head.toInt + word.tail.last.toString + word.tail.init.tail.toString + word.tail.head.toString
+      case 1 => word.head.toInt.toString
+      case 2 => word.head.toInt.toString + word.last
+      case 3 => word.head.toInt.toString + word.last + word.tail.head
+      case _ => word.head.toInt.toString + word.last + word.tail.init.tail + word.tail.head
   }
 
   def main(args: Array[String]) {
