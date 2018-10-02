@@ -1,5 +1,5 @@
 /*
-https://ide.geeksforgeeks.org/ZlWXSLykQl
+https://ide.geeksforgeeks.org/VGWJSVEQHs
 You want to create secret messages Here are the conditions:
 
 Your message is a string containing space separated words.
