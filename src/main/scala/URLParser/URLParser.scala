@@ -1,11 +1,13 @@
-// #1
+//Url Parser
+//https://ide.geeksforgeeks.org/Q2HLFymv2n
+//#1
 //input = 'http://holidaycheck.com/'
 //output = { protocol: 'http', 'domain': 'holidaycheck.com' }
-/*
-// #2
-input = 'https://holidaycheck.com/passions?q=yoga'
-output = { protocol: 'http', 'domain': 'holidaycheck.com',
-path: 'passions', query: {q: 'yoga'} */
+
+//#2
+//input = 'https://holidaycheck.com/passions?q=yoga'
+//output = { protocol: 'http', 'domain': 'holidaycheck.com',
+//path: 'passions', query: {q: 'yoga'} */
 
 
 package URLParser
@@ -35,10 +37,10 @@ object URLParser {
         (for (q <- query.split("&").flatMap(str => str.split("=", 2)).grouped(2)) yield (q(0) -> q(1))).toMap
       }
       val extendedUrl : Map[String, AnyRef] = (path, query) match {
-        case (path, query) if path.isEmpty => Map() 
-        case (path, query) if query.isEmpty => Map("path" -> path)
-        case (path, query) if !query.contains('=') => Map("path" -> path, "query" -> query)
-        case (path, query) => Map("path" -> path, "query" -> queryComponents)
+        case _ if path.isEmpty => Map() 
+        case _ if query.isEmpty => Map("path" -> path)
+        case _ if !query.contains('=') => Map("path" -> path, "query" -> query)
+        case _ => Map("path" -> path, "query" -> queryComponents)
       }
       extendedUrl
     }
