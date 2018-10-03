@@ -12,23 +12,30 @@ Examples:encryptThis "Hello" == "72olle"
 encryptThis "good" == "103doo"
 encryptThis "hello world" == "104olle 119drlo"
 */
+package Katas
+
 object EncryptThis {
 
   def encryptThis(text: String): String = text.split(" ").map(encryptWord).mkString(" ")
  
      
   def encryptWord(word: String): String =  word.length match {
-      case 0 => ""
-      case 1 => word.head.toInt.toString
-      case 2 => word.head.toInt.toString + word.last
-      case 3 => word.head.toInt.toString + word.last + word.tail.head
-      case _ => word.head.toInt.toString + word.last + word.tail.init.tail + word.tail.head
+    case 0 => ""
+    case 1 => word.head.toInt.toString
+    case 2 => word.head.toInt.toString + word.last
+    case 3 => word.head.toInt.toString + word.last + word.tail.head
+    case _ => word.head.toInt.toString + word.last + word.tail.init.tail + word.tail.head
   }
 
   def main(args: Array[String]) {
-      println(encryptThis("Hello"))
-      println(encryptThis("hello world"))
-      println(encryptThis("good"))
+    assert(encryptThis("Hello") == "72olle")
+    assert(encryptThis("good") == "103doo")
+    assert(encryptThis("hello world") == "104olle 119drlo")
+
+
+    println(encryptThis("Hello"))
+    println(encryptThis("hello world"))
+    println(encryptThis("good"))
   }
 
 }

@@ -18,6 +18,8 @@ h = 3, bounce = 0.66, window = 1.5, result is 3
 h = 3, bounce = 1, window = 1.5, result is -1 (Condition 2) not fulfilled).
 */
 
+package Katas
+
 object BouncingBall {
 
   def bouncingBall(h: Double, bounce: Double, window: Double): Int = {
@@ -27,8 +29,11 @@ object BouncingBall {
   }
 
   def main(args: Array[String]) {
-    println(bouncingBall(3, 0.66, 1.5)) //3
-    println(bouncingBall(3, 1, 1.5)) //-1
+    assert(bouncingBall(3, 0.66, 1.5) == 3)
+    assert(bouncingBall(3, 1, 1.5) == -1)
+
+    println(bouncingBall(3, 0.66, 1.5))
+    println(bouncingBall(3, 1, 1.5))
   }
 
 }
